@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ecos de Hallownest | Poema Virtual</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; min-height: 100vh; color: #e9edf4;
+    font-family: Georgia, "Times New Roman", serif;
+    background: radial-gradient(ellipse at 50% 15%, #26364a 0%, #111b2b 48%, #080d17 100%);
+    display: flex; justify-content: center; padding: 28px 16px;
+  }
+  main { width: min(850px, 100%); text-align: center; }
+  .eyebrow { color: #9bb6ce; letter-spacing: .22em; text-transform: uppercase; font: 12px Arial, sans-serif; }
+  h1 { font-size: clamp(34px, 7vw, 58px); margin: 12px 0 8px; font-weight: normal; letter-spacing: .04em; }
+  .intro { color: #bdc9d8; line-height: 1.6; max-width: 620px; margin: 0 auto 25px; font: 16px/1.6 Arial, sans-serif; }
+  .map {
+    position: relative; overflow: hidden; border: 1px solid #53677b; border-radius: 18px;
+    padding: 24px 18px; background: linear-gradient(145deg, rgba(50,72,94,.55), rgba(9,17,29,.88));
+    box-shadow: 0 18px 55px #0008;
+  }
+  .map:before, .map:after {
+    content: ""; position: absolute; border: 1px solid #7890a733; border-radius: 50%;
+    width: 360px; height: 180px; left: 50%; top: 50%; transform: translate(-50%,-50%) rotate(-24deg); pointer-events:none;
+  }
+  .map:after { width: 500px; height: 260px; transform: translate(-50%,-50%) rotate(32deg); }
+  .map-label { position: relative; z-index: 1; color: #93a9bd; font: 11px Arial,sans-serif; letter-spacing: .18em; margin-bottom: 18px; }
+  .places { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; max-width: 600px; margin: auto; }
+  button {
+    border: 1px solid #71879d; border-radius: 12px; padding: 15px 10px;
+    color: #edf3fa; background: #1b2a3dcc; cursor: pointer; font: 16px Georgia,serif;
+    transition: .2s ease;
+  }
+  button:hover, button:focus-visible { background: #344d68; border-color: #c0d5e8; transform: translateY(-2px); outline: none; }
+  button span { display:block; color:#9db2c6; font: 11px Arial,sans-serif; margin-top:6px; }
+  .poem {
+    margin: 22px auto 0; min-height: 150px; max-width: 650px; padding: 22px 18px;
+    border-top: 1px solid #71879d66; color: #e6edf5; position: relative; z-index: 1;
+  }
+  #region { color:#a9c4dc; font: 12px Arial,sans-serif; letter-spacing:.18em; text-transform:uppercase; }
+  #verse { white-space: pre-line; font-size: clamp(18px, 3.8vw, 23px); line-height:1.7; margin-top:12px; }
+  .hint { color:#91a4b8; font: 12px Arial,sans-serif; margin: 20px 0 0; }
+  footer { color:#71869b; font: 12px Arial,sans-serif; margin-top:20px; }
+  @media(max-width:480px) { .places { grid-template-columns:1fr; } .map {padding:20px 12px;} }
+</style>
+</head>
+<body>
+<main>
+  <div class="eyebrow">Uma jornada em versos</div>
+  <h1>Ecos de Hallownest</h1>
+  <p class="intro">Sob a superfície, um reino esquecido guarda histórias em suas ruínas. Escolha uma região do mapa e descubra os versos escondidos nela.</p>
+  <section class="map" aria-label="Mapa poético interativo de Hallownest">
+    <div class="map-label">MAPA DE HALLownest · ESCOLHA UM CAMINHO</div>
+    <div class="places">
+      <button onclick="showVerse('Encruzilhada Esquecida')">Encruzilhada Esquecida<span>Onde a jornada começa</span></button>
+      <button onclick="showVerse('Caminho Verde')">Caminho Verde<span>Onde a vida resiste</span></button>
+      <button onclick="showVerse('Cidade das Lágrimas')">Cidade das Lágrimas<span>Onde a memória permanece</span></button>
+      <button onclick="showVerse('Borda do Reino')">Borda do Reino<span>Onde tudo termina</span></button>
+    </div>
+    <div class="poem" aria-live="polite">
+      <div id="region">Toque em uma região</div>
+      <div id="verse">Cada lugar esconde uma parte da história.
+      Clique nos nomes acima para revelar os versos.</div>
+    </div>
+  </section>
+  <p class="hint">Você pode explorar as regiões em qualquer ordem. Cada clique revela um novo fragmento do poema.</p>
+  <footer>Poema virtual inspirado no universo de Hollow Knight</footer>
+</main>
+<script>
+const verses = {
+  "Encruzilhada Esquecida": "No silêncio onde a jornada nasceu,\num pequeno viajante apareceu.\nEntre caminhos, pedras e escuridão,\nseguiu guiado pela determinação.",
+  "Caminho Verde": "Entre folhas, raízes e luz,\na natureza seus segredos conduz.\nMesmo onde a esperança parece adormecer,\na vida encontra um jeito de florescer.",
+  "Cidade das Lágrimas": "A chuva cai sem nunca cessar,\nsobre uma cidade que insiste em lembrar.\nEm cada janela, um sonho se desfaz,\ne o eco do passado já não encontra paz.",
+  "Borda do Reino": "No limite do reino, o vento soprou,\ne tudo aquilo que restou contemplou.\nMesmo que o fim pareça chegar,\nhá sempre outro caminho a explorar."
+};
+function showVerse(place) {
+  document.getElementById("region").textContent = place;
+  document.getElementById("verse").textContent = verses[place];
+}
+</script>
+</body>
+</html>
